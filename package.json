@@ -1,0 +1,23 @@
+{
+  "name": "simple-express",
+  "version": "1.0.0",
+  "description": "Simple service using node and express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtardelli/node-express.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "RTardelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rtardelli/node-express/issues"
+  },
+  "homepage": "https://github.com/rtardelli/node-express#readme"
+}
