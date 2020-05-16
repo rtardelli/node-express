@@ -4,6 +4,7 @@
   "description": "Simple service using node and express",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/rtardelli/node-express/issues"
   },
-  "homepage": "https://github.com/rtardelli/node-express#readme"
+  "homepage": "https://github.com/rtardelli/node-express#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
