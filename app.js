@@ -7,6 +7,8 @@ const apiDocument = YAML.load('./service-openapi.yaml');
 
 const userRouter = require('./routes/user');
 
+const port = process.env.PORT || 3000;
+
 // Routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocument));
 app.use("users", userRouter);
@@ -15,6 +17,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(3000, () => {
-  console.log('That is working!');
+app.listen(port, () => {
+  console.log('That is working on port ' + port);
 });
