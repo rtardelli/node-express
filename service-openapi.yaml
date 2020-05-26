@@ -10,7 +10,7 @@ paths:
   /users:
     get:
       tags:
-        - name: user
+        - user
       summary: Returns a list of users
       operationId: getUsers
       responses:
@@ -26,7 +26,7 @@ paths:
           $ref: '#/components/responses/401Unauthorized'
     post:
       tags:
-        - name: user
+        - user
       summary: Create a new user
       operationId: addUser
       consumes:
@@ -55,7 +55,7 @@ paths:
   /users/{userId}:
     get:
       tags:
-        - name: user
+        - user
       summary: Returns an user
       operationId: getUserById
       responses:
@@ -73,7 +73,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     put:
       tags:
-        - name: user
+        - user
       summary: Update an user
       operationId: updateUser
       consumes:
@@ -100,7 +100,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     delete:
       tags:
-        - name: user
+        - user
       summary: Deletes an user
       operationId: deleteUser
       responses:
@@ -113,10 +113,8 @@ paths:
   /users/{userId}/services:
     get:
       tags:
-        - name: service
-          description: Services of a user
-        - name: user
-      summary: Returns an service array
+        - user
+      summary: Returns a service array of a user
       operationId: getServicesByUserId
       responses:
         '200':
@@ -133,49 +131,10 @@ paths:
           $ref: '#/components/responses/401Unauthorized'
         '404':
           $ref: '#/components/responses/404NotFound'
-    put:
-      tags:
-        - name: user
-      summary: Update an user
-      operationId: updateUser
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: user
-          in: body
-          description: The user JSON to be updated
-          schema:
-            $ref: '#/components/schemas/User'
-          required: true
-      responses:
-        '200':
-          description: A JSON of user updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '401':
-          $ref: '#/components/responses/401Unauthorized'
-        '404':
-          $ref: '#/components/responses/404NotFound'
-    delete:
-      tags:
-        - name: user
-      summary: Deletes an user
-      operationId: deleteUser
-      responses:
-        '204':
-          description: Success
-        '401':
-          $ref: '#/components/responses/401Unauthorized'
-        '404':
-          $ref: '#/components/responses/404NotFound'
   /stores:
     get:
       tags:
-        - name: store
+        - store
       summary: Returns a list of stores
       operationId: getStores
       responses:
@@ -191,7 +150,7 @@ paths:
           $ref: '#/components/responses/401Unauthorized'
     post:
       tags:
-        - name: store
+        - store
       summary: Create a new store
       operationId: addStore
       consumes:
@@ -220,7 +179,7 @@ paths:
   /stores/{storeId}:
     get:
       tags:
-        - name: store
+        - store
       summary: Returns an store
       operationId: getStoreById
       responses:
@@ -238,7 +197,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     put:
       tags:
-        - name: store
+        - store
       summary: Update an store
       operationId: updateStore
       consumes:
@@ -265,7 +224,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     delete:
       tags:
-        - name: store
+        - store
       summary: Deletes an store
       operationId: deleteStore
       responses:
@@ -278,9 +237,7 @@ paths:
   /stores/{storeId}/services:
     get:
       tags:
-        - name: service
-          description: Services of store
-        - name: store
+        - store
       summary: Returns an service array
       operationId: getServicesByUserId
       responses:
@@ -346,7 +303,7 @@ paths:
   /staffs/{staffId}:
     get:
       tags:
-        - name: staff
+        - staff
       summary: Returns an employee
       operationId: getStaffById
       responses:
@@ -364,7 +321,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     put:
       tags:
-        - name: staff
+        - staff
       summary: Update an staff
       operationId: updateStaff
       consumes:
@@ -391,7 +348,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     delete:
       tags:
-        - name: staff
+        - staff
       summary: Deletes an staff
       operationId: deleteStaff
       responses:
@@ -404,9 +361,7 @@ paths:
   /staffs/{staffId}/services:
     get:
       tags:
-        - name: service
-          description: Services of store
-        - name: staff
+        - staff
       summary: Returns an service array
       operationId: getServicesByStaffId
       responses:
@@ -427,7 +382,7 @@ paths:
   /services:
     get:
       tags:
-        - name: service
+        - service
       summary: Returns a list of services
       operationId: getServices
       responses:
@@ -472,7 +427,7 @@ paths:
   /services/{serviceId}:
     get:
       tags:
-        - name: service
+        - service
       summary: Returns a service
       operationId: getServiceById
       responses:
@@ -490,7 +445,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     put:
       tags:
-        - name: service
+        - service
       summary: Update an staff
       operationId: updateStaff
       consumes:
@@ -517,7 +472,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     delete:
       tags:
-        - name: service
+        - service
       summary: Deletes a service
       operationId: deleteService
       responses:
