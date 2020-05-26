@@ -10,7 +10,7 @@ paths:
   /users:
     get:
       tags:
-        - Users
+        - name: user
       summary: Returns a list of users
       operationId: getUsers
       responses:
@@ -26,7 +26,7 @@ paths:
           $ref: '#/components/responses/401Unauthorized'
     post:
       tags:
-        - Users
+        - name: user
       summary: Create a new user
       operationId: addUser
       consumes:
@@ -55,7 +55,7 @@ paths:
   /users/{userId}:
     get:
       tags:
-        - Users
+        - name: user
       summary: Returns an user
       operationId: getUserById
       responses:
@@ -73,7 +73,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     put:
       tags:
-        - Users
+        - name: user
       summary: Update an user
       operationId: updateUser
       consumes:
@@ -100,7 +100,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     delete:
       tags:
-        - Users
+        - name: user
       summary: Deletes an user
       operationId: deleteUser
       responses:
@@ -113,16 +113,20 @@ paths:
   /users/{userId}/services:
     get:
       tags:
-        - Services
+        - name: service
+          description: Services of a user
+        - name: user
       summary: Returns an service array
       operationId: getServicesByUserId
       responses:
         '200':
-          description: A JSON of user
+          description: A JSON array of services
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
         '400':
           description: The specified user ID is invalid (not a number).
         '401':
@@ -131,7 +135,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     put:
       tags:
-        - Users
+        - name: user
       summary: Update an user
       operationId: updateUser
       consumes:
@@ -158,7 +162,7 @@ paths:
           $ref: '#/components/responses/404NotFound'
     delete:
       tags:
-        - Users
+        - name: user
       summary: Deletes an user
       operationId: deleteUser
       responses:
@@ -170,60 +174,359 @@ paths:
           $ref: '#/components/responses/404NotFound'
   /stores:
     get:
+      tags:
+        - name: store
       summary: Returns a list of stores
+      operationId: getStores
       responses:
         '200':
           description: A JSON array of stores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
     post:
+      tags:
+        - name: store
+      summary: Create a new store
+      operationId: addStore
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: store
+          in: body
+          description: The store JSON to be added
+          schema:
+            $ref: '#/components/schemas/Store'
+          required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: New resource's URL
+        '400':
+          description: Content invalid.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
   /stores/{storeId}:
     get:
-      summary: Returns a store
+      tags:
+        - name: store
+      summary: Returns an store
+      operationId: getStoreById
       responses:
-      
+        '200':
+          description: A JSON of store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '400':
+          description: The specified store ID is invalid (not a number).
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
     put:
-    patch:
+      tags:
+        - name: store
+      summary: Update an store
+      operationId: updateStore
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: store
+          in: body
+          description: The store JSON to be updated
+          schema:
+            $ref: '#/components/schemas/Store'
+          required: true
+      responses:
+        '200':
+          description: A JSON of store updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
     delete:
+      tags:
+        - name: store
+      summary: Deletes an store
+      operationId: deleteStore
+      responses:
+        '204':
+          description: Success
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
   /stores/{storeId}/services:
     get:
-      summary: Returns a list of store's services
-      responses:
-        '200':
-          description: A JSON array of employee's services
-  /staffs:
-    get:
-      summary: Returns a list of employee
-      responses:
-        '200':
-          description: A JSON array of employees
-    post:
-  /staffs/{staffId}:
-    get:
-      summary: Returns a employee
-      responses:
-    put:
-    patch:
-    delete:
-  /staffs/{staffId}/services:
-    get:
-      summary: Returns a list of services of an employee
-      responses:
-        '200':
-          description: A JSON array of employee's services
-    post:
-  /services:
-    get:
-      summary: Returns a list of services
+      tags:
+        - name: service
+          description: Services of store
+        - name: store
+      summary: Returns an service array
+      operationId: getServicesByUserId
       responses:
         '200':
           description: A JSON array of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+        '400':
+          description: The specified user ID is invalid (not a number).
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /staffs:
+    get:
+      tags:
+        - staff
+      summary: Returns a list of staff
+      operationId: getUsers
+      responses:
+        '200':
+          description: A JSON array of staff
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Staff'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
     post:
+      tags:
+        - staff
+      summary: Create a new staff
+      operationId: addEmployee
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: employee
+          in: body
+          description: The employee JSON to be added
+          schema:
+            $ref: '#/components/schemas/Staff'
+          required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: New resource's URL
+        '400':
+          description: Content invalid.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+  /staffs/{staffId}:
+    get:
+      tags:
+        - name: staff
+      summary: Returns an employee
+      operationId: getStaffById
+      responses:
+        '200':
+          description: A JSON of staff
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        '400':
+          description: The specified staff ID is invalid (not a number).
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+    put:
+      tags:
+        - name: staff
+      summary: Update an staff
+      operationId: updateStaff
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: staff
+          in: body
+          description: The store JSON to be updated
+          schema:
+            $ref: '#/components/schemas/Staff'
+          required: true
+      responses:
+        '200':
+          description: A JSON of staff updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+    delete:
+      tags:
+        - name: staff
+      summary: Deletes an staff
+      operationId: deleteStaff
+      responses:
+        '204':
+          description: Success
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /staffs/{staffId}/services:
+    get:
+      tags:
+        - name: service
+          description: Services of store
+        - name: staff
+      summary: Returns an service array
+      operationId: getServicesByStaffId
+      responses:
+        '200':
+          description: A JSON array of service
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+        '400':
+          description: The specified user ID is invalid (not a number).
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /services:
+    get:
+      tags:
+        - name: service
+      summary: Returns a list of services
+      operationId: getServices
+      responses:
+        '200':
+          description: A JSON array of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Services'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+    post:
+      tags:
+        - service
+      summary: Create a new service
+      operationId: addService
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: service
+          in: body
+          description: The service JSON to be added
+          schema:
+            $ref: '#/components/schemas/Service'
+          required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: New resource's URL
+        '400':
+          description: Content invalid.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
   /services/{serviceId}:
     get:
+      tags:
+        - name: service
       summary: Returns a service
+      operationId: getServiceById
       responses:
+        '200':
+          description: A JSON of service
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          description: The specified service ID is invalid (not a number).
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
     put:
-    patch:
+      tags:
+        - name: service
+      summary: Update an staff
+      operationId: updateStaff
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: service
+          in: body
+          description: The service JSON to be updated
+          schema:
+            $ref: '#/components/schemas/Service'
+          required: true
+      responses:
+        '200':
+          description: A JSON of service updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
     delete:
+      tags:
+        - name: service
+      summary: Deletes a service
+      operationId: deleteService
+      responses:
+        '204':
+          description: Success
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '404':
+          $ref: '#/components/responses/404NotFound'
 
 components:
   #-------------------
@@ -266,9 +569,13 @@ components:
           format: int64
         name:
           type: string
+        userId:
+          type: integer
+          format: int64
       required:
         - id
         - name
+        - userId
     Staff:              # Can be referenced as '#/components/schemas/Staff'
       type: object
       properties:
