@@ -1,5 +1,5 @@
 exports.getAll = (req, res) => {
-  res.send('NOT IMPLEMENTED: Site Home Page');
+  res.send('NOT IMPLEMENTED: Get all users');
 };
 
 exports.add = (req, res) => {
