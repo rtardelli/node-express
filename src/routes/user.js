@@ -20,6 +20,6 @@ router.put("/:id", controllerUser.update);
 router.delete("/:id", controllerUser.delete);
 
 // Get services of user
-router.delete("/:id/services", controllerService.getByUserId);
+router.get("/:id/services", controllerService.getByUserId);
 
 module.exports = router;
