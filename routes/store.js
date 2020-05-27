@@ -1,21 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require("../controller/store");
+const controllerStore = require("../controller/store");
+const controllerService = require("../controller/service");
 
 // List all stores
-router.get("/", controller.getAll);
+router.get("/", controllerStore.getAll);
 
 // Add store
-router.post("/", controller.add);
+router.post("/", controllerStore.add);
 
 // Get store
-router.get("/:id", controller.getStore);
+router.get("/:id", controllerStore.getUser);
 
 // Update store
-router.put("/:id", controller.updateStore);
+router.put("/:id", controllerStore.updateUser);
 
 // Delete store
-router.delete("/:id", controller.deleteStore);
+router.delete("/:id", controllerStore.deleteUser);
+
+// Get services of a store
+router.delete("/:id/services", controllerService.getServicesByStoreId);
 
 module.exports = router;
