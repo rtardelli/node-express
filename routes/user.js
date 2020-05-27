@@ -11,15 +11,15 @@ router.get("/", controllerUser.getAll);
 router.post("/", controllerUser.add);
 
 // Get user
-router.get("/:id", controllerUser.getUser);
+router.get("/:id", controllerUser.get);
 
 // Update user
-router.put("/:id", controllerUser.updateUser);
+router.put("/:id", controllerUser.update);
 
 // Delete user
-router.delete("/:id", controllerUser.deleteUser);
+router.delete("/:id", controllerUser.delete);
 
 // Get services of user
-router.delete("/:id/services", controllerService.getServicesByUserId);
+router.delete("/:id/services", controllerService.getByUserId);
 
 module.exports = router;
