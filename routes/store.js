@@ -11,15 +11,15 @@ router.get("/", controllerStore.getAll);
 router.post("/", controllerStore.add);
 
 // Get store
-router.get("/:id", controllerStore.getUser);
+router.get("/:id", controllerStore.get);
 
 // Update store
-router.put("/:id", controllerStore.updateUser);
+router.put("/:id", controllerStore.update);
 
 // Delete store
-router.delete("/:id", controllerStore.deleteUser);
+router.delete("/:id", controllerStore.delete);
 
 // Get services of a store
-router.delete("/:id/services", controllerService.getServicesByStoreId);
+router.delete("/:id/services", controllerService.getByStoreId);
 
 module.exports = router;
