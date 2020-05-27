@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const fs = require('fs');
+const path = require('path')
 const swaggerUi = require("swagger-ui-express");
 
 const YAML = require("yamljs");
@@ -11,7 +13,11 @@ const userRouter = require("./routes/user");
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(morgan("combined"));
+// create a write stream (in append mode)
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" })
+ 
+// setup the logger
+app.use(morgan("combined", { stream: accessLogStream }))
 
 // Routes
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(apiDocument));
