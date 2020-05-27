@@ -276,15 +276,15 @@ paths:
       tags:
         - staff
       summary: Create a new staff
-      operationId: addEmployee
+      operationId: addStaff
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
-        - name: employee
+        - name: staff
           in: body
-          description: The employee JSON to be added
+          description: The staff JSON to be added
           schema:
             $ref: '#/components/schemas/Staff'
           required: true
@@ -304,7 +304,7 @@ paths:
     get:
       tags:
         - staff
-      summary: Returns an employee
+      summary: Returns a staff
       operationId: getStaffById
       responses:
         '200':
