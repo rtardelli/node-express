@@ -29,4 +29,28 @@ describe('User storage test', () => {
         expect(user).not.toBe(null);
         expect(user.name).toBe("user1");
     });
+
+    test('update user', () => {
+        const user = localStorage.getUser(1);
+        user.name = "othername";
+        localStorage.updateUser(user);
+
+        const user2 = localStorage.getUser(1);
+        expect(user2).not.toBe(null);
+        expect(user2.name).toBe("othername");
+    });
+
+    test('delete user', () => {
+        let users = localStorage.getAllUsers();
+        expect(users.length).toBe(2)
+
+        localStorage.deleteUser(1);
+        
+        users = localStorage.getAllUsers();
+        expect(users.length).toBe(1)
+
+        const user2 = localStorage.getUser(2);
+        expect(user2).not.toBe(null);
+        expect(user2.name).toBe("user2");
+    });
 });

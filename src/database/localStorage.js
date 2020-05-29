@@ -32,7 +32,8 @@ exports.deleteUser = (userID) => {
     for (let i = 0; i < storageUsers.length; i++) {
         const u = storageUsers[i];
         if (u.id == userID) {
-            storageUsers.slice(i, i);
+            storageUsers.splice(i, 1);
+            break;
         }
     }
 };
