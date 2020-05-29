@@ -90,6 +90,10 @@ exports.clearStores = () => {
 
 let storageStaffs = [];
 
+exports.getAllStaffs = () => {
+    return storageStaffs;
+};
+
 exports.addStaff = (staff) => {
     storageStaffs.push(staff);
 };

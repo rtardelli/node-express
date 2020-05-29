@@ -106,3 +106,54 @@ describe('Store storage test', () => {
         expect(store2.name).toBe("store2");
     });
 });
+
+describe('Staff storage test', () => {
+    test('Initial empty', () => {
+        const staffs = localStorage.getAllStaffs();
+        expect(staffs.length).toBe(0);
+    });
+
+    test('Add staff', () => {
+        const staff = { id: 1, name: "staff1"};
+
+        localStorage.addStaff(staff);
+        let staffs = localStorage.getAllStaffs();
+        expect(staffs.length).toBe(1);
+
+        const staff1 = { id: 2, name: "staff2"};
+
+        localStorage.addStaff(staff1);
+        staffs = localStorage.getAllStaffs();
+        expect(staffs.length).toBe(2)
+    });
+
+    test('get staff', () => {
+        const staff = localStorage.getStaff(1);
+        expect(staff).not.toBe(null);
+        expect(staff.name).toBe("staff1");
+    });
+
+    test('update staff', () => {
+        const staff = localStorage.getStaff(1);
+        staff.name = "othername";
+        localStorage.updateStaff(staff);
+
+        const staff2 = localStorage.getStaff(1);
+        expect(staff2).not.toBe(null);
+        expect(staff2.name).toBe("othername");
+    });
+
+    test('delete staff', () => {
+        let staffs = localStorage.getAllStaffs();
+        expect(staffs.length).toBe(2)
+
+        localStorage.deleteStaff(1);
+        
+        staffs = localStorage.getAllStaffs();
+        expect(staffs.length).toBe(1)
+
+        const staff2 = localStorage.getStaff(2);
+        expect(staff2).not.toBe(null);
+        expect(staff2.name).toBe("staff2");
+    });
+});
