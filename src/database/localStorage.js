@@ -134,6 +134,10 @@ exports.clearStaffs = () => {
 
 let storageServices = [];
 
+exports.getAllServices = () => {
+    return storageServices;
+};
+
 exports.addService = (service) => {
     storageServices.push(service);
 };
@@ -166,31 +170,18 @@ exports.deleteService = (serviceID) => {
     }
 };
 
-exports.clearServices = () => {
-    storageServices = [];
-};
-
 exports.getServicesByUserID = (userID) => {
-    let response = [];
-
-    const user = this.getUser(userID);
-    if (user) {
-        const serviceIDs = user.services;
-        for (let i = 0; i < serviceIDs.length; i++) {
-            const s = this.getService(serviceIDs[i]);
-            if(s){
-                response.push(s);
-            }
-        }
-
-    }
-    return response;
+    return this.getAllServices().filter(s => s.userID == userID);
 };
 
 exports.getServicesByStoreID = (storeID) => {
-    // TODO: Implement
+    return this.getAllServices().filter(s => s.storeID == storeID);
 };
 
 exports.getServicesByStaffID = (staffID) => {
-    // TODO: Implement
+    return this.getAllServices().filter(s => s.staffID == staffID);
+};
+
+exports.clearServices = () => {
+    storageServices = [];
 };

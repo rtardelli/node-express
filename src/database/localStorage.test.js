@@ -157,3 +157,106 @@ describe('Staff storage test', () => {
         expect(staff2.name).toBe("staff2");
     });
 });
+
+describe('Service storage test', () => {
+    test('Initial empty', () => {
+        const services = localStorage.getAllServices();
+        expect(services.length).toBe(0);
+    });
+
+    test('Add service', () => {
+        const store = { id: 1, name: "store1"};
+        localStorage.addStore(store);
+
+        const staff = { id: 1, name: "staff1"};
+        localStorage.addStaff(staff);
+
+        const user = { id: 1, name: "user1"};
+        localStorage.addUser(user);
+        
+        const service = { id: 1, name: "service1", userID: 1, storeID: 1, staffID: 1};
+        localStorage.addService(service);
+
+        let services = localStorage.getAllServices();
+        expect(services.length).toBe(1);
+
+        const service1 = { id: 2, name: "service2", userID: 1, storeID: 1, staffID: 1};
+
+        localStorage.addService(service1);
+        services = localStorage.getAllServices();
+        expect(services.length).toBe(2)
+    });
+
+    test('get service', () => {
+        const service = localStorage.getService(1);
+        expect(service).not.toBe(null);
+        expect(service.name).toBe("service1");
+    });
+
+    test('update service', () => {
+        const service = localStorage.getService(1);
+        service.name = "othername";
+        localStorage.updateStaff(service);
+
+        const service2 = localStorage.getService(1);
+        expect(service2).not.toBe(null);
+        expect(service2.name).toBe("othername");
+    });
+
+    test('delete service', () => {
+        let services = localStorage.getAllServices();
+        expect(services.length).toBe(2)
+
+        localStorage.deleteService(1);
+        
+        services = localStorage.getAllServices();
+        expect(services.length).toBe(1)
+
+        const service2 = localStorage.getService(2);
+        expect(service2).not.toBe(null);
+        expect(service2.name).toBe("service2");
+    });
+
+    test('get service by user', () => {
+        let services = localStorage.getAllServices();
+        expect(services.length).toBe(1)
+        
+        const store = { id: 1, name: "store1"};
+        const staff = { id: 1, name: "staff1"};
+        const user = { id: 1, name: "user1"};
+        const user2 = { id: 2, name: "user2"};
+
+        const service3 = { id: 3, name: "service3", userID: 1, storeID: 1, staffID: 1};
+        localStorage.addService(service3);
+        const service4 = { id: 4, name: "service4", userID: 2, storeID: 2, staffID: 2};
+        localStorage.addService(service4);
+
+        services = localStorage.getAllServices();
+        expect(services.length).toBe(3)
+      
+        services = localStorage.getServicesByUserID(1);
+        expect(services.length).toBe(2);
+        services = localStorage.getServicesByUserID(2);
+        expect(services.length).toBe(1);
+    });
+
+    test('get service by store', () => {
+        services = localStorage.getAllServices();
+        expect(services.length).toBe(3)
+      
+        services = localStorage.getServicesByStoreID(1);
+        expect(services.length).toBe(2);
+        services = localStorage.getServicesByStoreID(2);
+        expect(services.length).toBe(1);
+    });
+
+    test('get service by staff', () => {
+        services = localStorage.getAllServices();
+        expect(services.length).toBe(3)
+      
+        services = localStorage.getServicesByStaffID(1);
+        expect(services.length).toBe(2);
+        services = localStorage.getServicesByStaffID(2);
+        expect(services.length).toBe(1);
+    });
+});
