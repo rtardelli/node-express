@@ -46,6 +46,10 @@ exports.clearUsers = () => {
 
 let storageStores = [];
 
+exports.getAllStores = () => {
+    return storageStores;
+};
+
 exports.addStore = (store) => {
     storageStores.push(store);
 };
@@ -72,7 +76,8 @@ exports.deleteStore = (storeID) => {
     for (let i = 0; i < storageStores.length; i++) {
         const s = storageStores[i];
         if (s.id == storeID) {
-            storageStores.slice(i, i);
+            storageStores.splice(i, 1);
+            break;
         }
     }
 };
@@ -111,7 +116,8 @@ exports.deleteStaff = (staffID) => {
     for (let i = 0; i < storageStaffs.length; i++) {
         const s = storageStaffs[i];
         if (s.id == staffID) {
-            storageStaffs.slice(i, i);
+            storageStaffs.splice(i, 1);
+            break;
         }
     }
 };
@@ -150,7 +156,8 @@ exports.deleteService = (serviceID) => {
     for (let i = 0; i < storageServices.length; i++) {
         const s = storageServices[i];
         if (s.id == serviceID) {
-            storageServices.slice(i, i);
+            storageServices.splice(i, 1);
+            break;
         }
     }
 };
