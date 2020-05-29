@@ -1,6 +1,6 @@
 const localStorage = require("./localStorage");
 
-beforeEach(() => {
+beforeAll(() => {
     localStorage.clearUsers();
 });
 
@@ -22,5 +22,11 @@ describe('User storage test', () => {
         localStorage.addUser(user1);
         users = localStorage.getAllUsers();
         expect(users.length).toBe(2)
+    });
+
+    test('get user', () => {
+        const user = localStorage.getUser(1);
+        expect(user).not.toBe(null);
+        expect(user.name).toBe("user1");
     });
 });
