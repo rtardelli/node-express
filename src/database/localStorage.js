@@ -2,6 +2,10 @@
 
 let storageUsers = [];
 
+exports.getAllUsers = () => {
+    return storageUsers;
+};
+
 exports.addUser = (user) => {
     storageUsers.push(user);
 };
