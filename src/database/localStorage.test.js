@@ -3,6 +3,8 @@ const localStorage = require("./localStorage");
 beforeAll(() => {
     localStorage.clearUsers();
     localStorage.clearStores();
+    localStorage.clearStaff();
+    localStorage.clearServices();
 });
 
 describe('User storage test', () => {
