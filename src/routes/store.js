@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const controllerStore = require("../controller/store");
-const controllerService = require("../controller/service");
+const controllerStore = require("../controller/storeLocal");
+const controllerService = require("../controller/serviceLocal");
 
 // List all stores
 router.get("/", controllerStore.getAll);

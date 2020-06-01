@@ -1,4 +1,4 @@
-module.exports = class ServiceController {
+class ServiceController {
   getAll = (req, res) => {
     res.send('NOT IMPLEMENTED: Get all services');
   }
@@ -31,4 +31,6 @@ module.exports = class ServiceController {
     res.send('NOT IMPLEMENTED: Get services by StaffId: ' + req.params.id);
   }
 
-}
+};
+
+module.exports = new ServiceController();

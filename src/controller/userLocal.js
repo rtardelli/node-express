@@ -1,4 +1,4 @@
-module.exports = class UserController {
+class UserController {
   constructor(){}
 
   clear = (req, res) => {
@@ -25,3 +25,5 @@ module.exports = class UserController {
     res.send('NOT IMPLEMENTED: Delete user ' + req.params.id);
   }
 };
+
+module.exports = new UserController();

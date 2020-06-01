@@ -16,11 +16,6 @@ class App {
         this.database();
         this.middlewares();
         this.routes();
-
-        const port = process.env.PORT || 3000;
-        this.express.listen(port, () => {
-            console.log("That is working on port " + port);
-        });
     }
 
     database() {

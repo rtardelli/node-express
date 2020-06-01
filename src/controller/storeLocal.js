@@ -1,4 +1,4 @@
-module.exports = class StoreController {
+class StoreController {
   getAll = (req, res) => {
     res.send('NOT IMPLEMENTED: Get all');
   }
@@ -18,4 +18,6 @@ module.exports = class StoreController {
   delete = (req, res) => {
     res.send('NOT IMPLEMENTED: Delete store ' + req.params.id);
   }
-}
+};
+
+module.exports = new StoreController();

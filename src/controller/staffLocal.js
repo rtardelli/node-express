@@ -1,4 +1,4 @@
-module.exports = class StaffController {
+class StaffController {
   getAll = (req, res) => {
     res.send('NOT IMPLEMENTED: Get all staff');
   }
@@ -19,4 +19,6 @@ module.exports = class StaffController {
     res.send('NOT IMPLEMENTED: Delete staff ' + req.params.id);
   }
 
-}
+};
+
+module.exports = new StaffController();

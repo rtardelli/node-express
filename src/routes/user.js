@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const controllerUser = require("../controller/user");
-const controllerService = require("../controller/service");
+const controllerUser = require("../controller/userLocal");
+const controllerService = require("../controller/serviceLocal");
 
 // List all users
 router.get("/", controllerUser.getAll);
