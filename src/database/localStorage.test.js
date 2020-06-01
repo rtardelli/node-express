@@ -3,7 +3,7 @@ const localStorage = require("./localStorage");
 beforeAll(() => {
     localStorage.clearUsers();
     localStorage.clearStores();
-    localStorage.clearStaff();
+    localStorage.clearStaffs();
     localStorage.clearServices();
 });
 
