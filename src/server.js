@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const fs = require('fs');
 const path = require('path')
@@ -23,8 +24,10 @@ class App {
     }
 
     middlewares() {
-        const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" })
-        this.express.use(morgan("combined", { stream: accessLogStream }))
+        const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" });
+        this.express.use(morgan("combined", { stream: accessLogStream }));
+        this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(bodyParser.json());
     }
 
     routes() {
