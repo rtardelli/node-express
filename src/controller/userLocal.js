@@ -1,8 +1,11 @@
+const localStorage = require("../database/localStorage");
+
 class UserController {
   constructor(){}
 
   clear = async (req, res) => {
-    await res.send('NOT IMPLEMENTED: Clear users');
+    localStorage.clearUsers();
+    await res.status(200);
   }
 
   getAll = async (req, res) => {
