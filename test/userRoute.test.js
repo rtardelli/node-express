@@ -16,4 +16,13 @@ describe('User Endpoints', () => {
       expect(res.body).toEqual({});
       expect(res.header['location']).toEqual('/users/1');
   });
+
+  test('should get all users with one user', async () => {
+    const res = await request(app).get('/users');
+    expect(res.statusCode).toEqual(200);
+
+    const responseBody = res.body;
+    expect(typeof(responseBody)).toEqual("Array");
+    expect(responseBody.lenght).toEqual(1);
+  });
 });
