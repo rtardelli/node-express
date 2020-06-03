@@ -77,7 +77,7 @@ exports.deleteStore = (storeID) => {
         const s = storageStores[i];
         if (s.id == storeID) {
             storageStores.splice(i, 1);
-            break;
+            return s;
         }
     }
 };

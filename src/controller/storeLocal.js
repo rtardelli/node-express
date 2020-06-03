@@ -1,22 +1,49 @@
+const localStorage = require("../database/localStorage");
+
 class StoreController {
-  getAll = (req, res) => {
-    res.send('NOT IMPLEMENTED: Get all');
+  constructor(){}
+
+  clear = async (req, res) => {
+    localStorage.clearStores();
+    res.status(200);
   }
 
-  add = (req, res) => {
-    res.send('NOT IMPLEMENTED: Addind store');
+  getAll = async (req, res) => {
+    const storeList = localStorage.getAllStores();
+    res.status(200).json(storeList);
   }
 
-  get = (req, res) => {
-    res.send('NOT IMPLEMENTED: Get store ' + req.params.id);
+  add = async (req, res) => {
+    const store = req.body;
+    // TODO: Validate store
+    localStorage.addStore(store);
+    res.location("/stores/" + store.id);
+    res.status(201).end();
   }
 
-  update = (req, res) => {
-    res.send('NOT IMPLEMENTED: Update store ' + req.params.id);
+  get = async (req, res) => {
+    const storeID = req.params.id;
+    const store = localStorage.getStore(storeID);
+    res.status(200).json(store);
   }
 
-  delete = (req, res) => {
-    res.send('NOT IMPLEMENTED: Delete store ' + req.params.id);
+  update = async (req, res) => {
+    const store = req.body;
+    // TODO: Validate store
+    localStorage.updateStore(store);
+    res.status(200).json(store);
+  }
+
+  delete = async (req, res) => {
+    const storeID = req.params.id;
+    const deletedStore = localStorage.deleteStore(storeID);
+    
+    if(deletedStore) {
+      res.status(204);
+    } else {
+      res.status(404);
+    }
+    res.end();
   }
 };
 
