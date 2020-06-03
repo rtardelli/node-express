@@ -1,22 +1,49 @@
+const localStorage = require("../database/localStorage");
+
 class StaffController {
-  getAll = (req, res) => {
-    res.send('NOT IMPLEMENTED: Get all staff');
+  constructor(){}
+
+  clear = async (req, res) => {
+    localStorage.clearStaffs();
+    res.status(200);
   }
 
-  add = (req, res) => {
-    res.send('NOT IMPLEMENTED: Addind staff');
+  getAll = async (req, res) => {
+    const staffList = localStorage.getAllStaffs();
+    res.status(200).json(staffList);
   }
 
-  get = (req, res) => {
-    res.send('NOT IMPLEMENTED: Get staff ' + req.params.id);
+  add = async (req, res) => {
+    const staff = req.body;
+    // TODO: Validate staff
+    localStorage.addStaff(staff);
+    res.location("/staffs/" + staff.id);
+    res.status(201).end();
   }
 
-  update = (req, res) => {
-    res.send('NOT IMPLEMENTED: Update staff ' + req.params.id);
+  get = async (req, res) => {
+    const staffID = req.params.id;
+    const staff = localStorage.getStaff(staffID);
+    res.status(200).json(staff);
   }
 
-  delete = (req, res) => {
-    res.send('NOT IMPLEMENTED: Delete staff ' + req.params.id);
+  update = async (req, res) => {
+    const staff = req.body;
+    // TODO: Validate staff
+    localStorage.updateStaff(staff);
+    res.status(200).json(staff);
+  }
+
+  delete = async (req, res) => {
+    const staffID = req.params.id;
+    const deletedStaff = localStorage.deleteStaff(staffID);
+    
+    if(deletedStaff) {
+      res.status(204);
+    } else {
+      res.status(404);
+    }
+    res.end();
   }
 
 };

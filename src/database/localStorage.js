@@ -121,7 +121,7 @@ exports.deleteStaff = (staffID) => {
         const s = storageStaffs[i];
         if (s.id == staffID) {
             storageStaffs.splice(i, 1);
-            break;
+            return s;
         }
     }
 };
@@ -165,7 +165,7 @@ exports.deleteService = (serviceID) => {
         const s = storageServices[i];
         if (s.id == serviceID) {
             storageServices.splice(i, 1);
-            break;
+            return s;
         }
     }
 };
