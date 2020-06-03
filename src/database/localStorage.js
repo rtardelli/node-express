@@ -33,7 +33,7 @@ exports.deleteUser = (userID) => {
         const u = storageUsers[i];
         if (u.id == userID) {
             storageUsers.splice(i, 1);
-            break;
+            return u;
         }
     }
 };

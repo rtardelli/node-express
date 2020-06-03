@@ -41,4 +41,16 @@ describe('User Endpoints', () => {
     expect(responseBody.id).toEqual(1);
     expect(responseBody.name).toEqual("New user name");
   });
+
+  test('should delete user', async () => {
+    let res = await request(app).delete("/users/1");
+    expect(res.statusCode).toEqual(204);
+    expect(res.body).toEqual({});
+  });
+
+  test('should not delete user', async () => {
+    let res = await request(app).delete("/users/2");
+    expect(res.statusCode).toEqual(404);
+    expect(res.body).toEqual({});
+  });
 });
