@@ -22,7 +22,9 @@ class UserController {
   }
 
   get = async (req, res) => {
-    await res.send('NOT IMPLEMENTED: Get user ' + req.params.id);
+    const userID = req.params.id;
+    const user = localStorage.getUser(userID);
+    await res.status(200).json(user);
   }
 
   update = async (req, res) => {

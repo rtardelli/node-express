@@ -20,9 +20,15 @@ describe('User Endpoints', () => {
   test('should get all users with one user', async () => {
     const res = await request(app).get('/users');
     expect(res.statusCode).toEqual(200);
-
     const responseBody = res.body;
-    expect(typeof(responseBody)).toEqual("Array");
-    expect(responseBody.lenght).toEqual(1);
+    expect(responseBody.length).toEqual(1);
+  });
+
+  test('should get user', async () => {
+    const res = await request(app).get('/users/1');
+    expect(res.statusCode).toEqual(200);
+    const responseBody = res.body;
+    expect(responseBody.id).toEqual("1");
+    expect(responseBody.name).toEqual("Name user 1");
   });
 });
