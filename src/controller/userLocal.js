@@ -9,7 +9,8 @@ class UserController {
   }
 
   getAll = async (req, res) => {
-    await res.send('NOT IMPLEMENTED: Get all users');
+    const userList = localStorage.getAllUsers();
+    await res.status(200).json(userList);
   }
 
   add = async (req, res) => {
