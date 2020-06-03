@@ -18,7 +18,7 @@ class UserController {
     // TODO: Validate user
     localStorage.addUser(user);
     res.location("/users/" + user.id);
-    res.status(201).end();
+    await res.status(201).end();
   }
 
   get = async (req, res) => {
@@ -28,7 +28,10 @@ class UserController {
   }
 
   update = async (req, res) => {
-    await res.send('NOT IMPLEMENTED: Update user ' + req.params.id);
+    const user = req.body;
+    // TODO: Validate user
+    localStorage.updateUser(user);
+    await res.status(200).json(user);
   }
 
   delete = async (req, res) => {
