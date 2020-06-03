@@ -5,7 +5,7 @@ class UserController {
 
   clear = async (req, res) => {
     localStorage.clearUsers();
-    await res.status(200);
+    res.status(200);
   }
 
   getAll = async (req, res) => {
