@@ -14,7 +14,11 @@ class UserController {
   }
 
   add = async (req, res) => {
-    await res.send('NOT IMPLEMENTED: Addind user');
+    const user = req.body;
+    // TODO: Validate user
+    localStorage.addUser(user);
+    res.location("/users/" + user.id);
+    res.status(201).end();
   }
 
   get = async (req, res) => {

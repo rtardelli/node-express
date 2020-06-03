@@ -12,7 +12,8 @@ describe('User Endpoints', () => {
     const res = await request(app)
       .post('/users')
       .send({ "id": "1", "name": "Name user 1"});
-    expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual({});
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toEqual({});
+      expect(res.header['location']).toEqual('/users/1');
   });
 });
