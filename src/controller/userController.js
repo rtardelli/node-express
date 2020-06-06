@@ -1,42 +1,44 @@
-const localStorage = require("../database/localStorage");
+const diConfig = require("../config/config");
 
 class UserController {
-  constructor(){}
+  constructor(){
+    this.repository = diConfig.repository;
+  }
 
   clear = async (req, res) => {
-    localStorage.clearUsers();
+    await this.repository.clearUsers();
     res.status(200);
   }
 
   getAll = async (req, res) => {
-    const userList = localStorage.getAllUsers();
+    const userList = await this.repository.getAllUsers();
     res.status(200).json(userList);
   }
 
   add = async (req, res) => {
     const user = req.body;
     // TODO: Validate user
-    localStorage.addUser(user);
+    await this.repository.addUser(user);
     res.location("/users/" + user.id);
     res.status(201).end();
   }
 
   get = async (req, res) => {
     const userID = req.params.id;
-    const user = localStorage.getUser(userID);
+    const user = await this.repository.getUser(userID);
     res.status(200).json(user);
   }
 
   update = async (req, res) => {
     const user = req.body;
     // TODO: Validate user
-    localStorage.updateUser(user);
+    await this.repository.updateUser(user);
     res.status(200).json(user);
   }
 
   delete = async (req, res) => {
     const userID = req.params.id;
-    const deletedUser = localStorage.deleteUser(userID);
+    const deletedUser = await this.repository.deleteUser(userID);
     
     if(deletedUser) {
       res.status(204);

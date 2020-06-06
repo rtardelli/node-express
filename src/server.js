@@ -15,7 +15,6 @@ const staffRouter = require("./routes/staff");
 class App {
     constructor() {
         this.express = express();
-
         this.database();
         this.middlewares();
         this.routes();

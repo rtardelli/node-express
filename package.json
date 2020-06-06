@@ -4,8 +4,8 @@
   "description": "Simple service using node and express",
   "main": "app.js",
   "scripts": {
-    "start-dev": "nodemon src/app.js",
-    "test": "jest --detectOpenHandles"
+    "start-local": "NODE_ENV=local nodemon src/app.js",
+    "test": "NODE_ENV=local jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
