@@ -46,6 +46,13 @@ class UserController {
       res.status(404).end();
     }
   }
+
+  getServices = async (req, res) => {
+    const userID = req.params.id;
+    const services = await this.repository.getServicesByUserID(userID);
+
+    res.status(200).json(services);
+  };
 };
 
 module.exports = new UserController();
