@@ -1,25 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-const controllerStaff = require("../controller/staffLocal");
-const controllerService = require("../controller/serviceLocal");
+const controllerService = require("../controller/serviceController");
 
 // List all staff
-router.get("/", controllerStaff.getAll);
+router.get("/", controllerService.getAll);
 
 // Add staff
-router.post("/", controllerStaff.add);
+router.post("/", controllerService.add);
 
 // Get staff
-router.get("/:id", controllerStaff.get);
+router.get("/:id", controllerService.get);
 
 // Update staff
-router.put("/:id", controllerStaff.update);
+router.put("/:id", controllerService.update);
 
 // Delete staff
-router.delete("/:id", controllerStaff.delete);
-
-// Get services of a staff
-router.delete("/:id/services", controllerService.getByStaffId);
+router.delete("/:id", controllerService.delete);
 
 module.exports = router;

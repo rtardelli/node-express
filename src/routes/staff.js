@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controllerStaff = require("../controller/staffController");
-const controllerService = require("../controller/serviceLocal");
+const controllerService = require("../controller/serviceController");
 
 // List all staff
 router.get("/", controllerStaff.getAll);

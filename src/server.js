@@ -11,6 +11,7 @@ const apiDocument = YAML.load("src/service-openapi.yaml");
 const userRouter = require("./routes/user");
 const storeRouter = require("./routes/store");
 const staffRouter = require("./routes/staff");
+const serviceRouter = require("./routes/service");
 
 class App {
     constructor() {
@@ -39,7 +40,8 @@ class App {
         this.express.use("/api-docs", swaggerUi.serve, swaggerUi.setup(apiDocument));
         this.express.use("/users", userRouter);
         this.express.use("/stores", storeRouter);
-        this.express.use("/staffs", staffRouter);       
+        this.express.use("/staffs", staffRouter);
+        this.express.use("/services", serviceRouter);       
     }
 }
 

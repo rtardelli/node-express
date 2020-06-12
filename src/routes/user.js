@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controllerUser = require("../controller/userController");
-const controllerService = require("../controller/serviceLocal");
+const controllerService = require("../controller/serviceController");
 
 // List all users
 router.get("/", controllerUser.getAll);

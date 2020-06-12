@@ -13,10 +13,10 @@ describe('User Endpoints', () => {
     const res = await request(app)
       .post('/users')
       .send({ id: 1, name: "Name user 1"});
-      expect(res.statusCode).toEqual(201);
-      expect(res.body).toEqual({});
-      expect(res.header['location']).toEqual('/users/1');
-      done();
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/users/1');
+    done();
   });
 
   test('should get all users with one user', async (done) => {
@@ -60,4 +60,27 @@ describe('User Endpoints', () => {
     expect(res.body).toEqual({});
     done();
   });
+
+  // test('should get all services empty', async (done) => {
+  //   const res = await request(app).get('/services');
+  //   expect(res.statusCode).toEqual(200);
+  //   expect(res.body).toEqual([]);
+  //   done();
+  // });
+  // test('should get all services', async (done) => {
+  //   // Adding user
+  //   const res = await request(app)
+  //     .post('/users')
+  //     .send({ id: 5, name: "Name user 5"});
+  //   expect(res.statusCode).toEqual(201);
+  //   expect(res.body).toEqual({});
+  //   expect(res.header['location']).toEqual('/users/5');
+  //   const res = await request(app)
+  //     .post('/services')
+  //     .send({ id: 1, name: "Name service 5", userID: 5});
+  //   expect(res.statusCode).toEqual(201);
+  //   expect(res.body).toEqual({});
+  //   expect(res.header['location']).toEqual('/service/1');
+  //   done();
+  // });
 });
