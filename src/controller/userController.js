@@ -41,11 +41,10 @@ class UserController {
     const deletedUser = await this.repository.deleteUser(userID);
     
     if(deletedUser) {
-      res.status(204);
+      res.status(204).end();
     } else {
-      res.status(404);
+      res.status(404).end();
     }
-    res.end();
   }
 };
 
