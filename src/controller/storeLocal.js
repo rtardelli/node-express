@@ -1,42 +1,44 @@
-const localStorage = require("../database/localStorage");
+const diConfig = require("../config/config");
 
 class StoreController {
-  constructor(){}
+  constructor(){
+    this.repository = diConfig.repository;
+  }
 
   clear = async (req, res) => {
-    localStorage.clearStores();
+    await this.repository.clearStores();
     res.status(200);
   }
 
   getAll = async (req, res) => {
-    const storeList = localStorage.getAllStores();
+    const storeList = await this.repository.getAllStores();
     res.status(200).json(storeList);
   }
 
   add = async (req, res) => {
     const store = req.body;
     // TODO: Validate store
-    localStorage.addStore(store);
+    await this.repository.addStore(store);
     res.location("/stores/" + store.id);
     res.status(201).end();
   }
 
   get = async (req, res) => {
     const storeID = req.params.id;
-    const store = localStorage.getStore(storeID);
+    const store = await this.repository.getStore(storeID);
     res.status(200).json(store);
   }
 
   update = async (req, res) => {
     const store = req.body;
     // TODO: Validate store
-    localStorage.updateStore(store);
+    await this.repository.updateStore(store);
     res.status(200).json(store);
   }
 
   delete = async (req, res) => {
     const storeID = req.params.id;
-    const deletedStore = localStorage.deleteStore(storeID);
+    const deletedStore = await this.repository.deleteStore(storeID);
     
     if(deletedStore) {
       res.status(204);
