@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controllerUser = require("../controller/userController");
+const controllerService = require("../controller/serviceController");
 
 // List all users
 router.get("/", controllerUser.getAll);
@@ -19,6 +20,6 @@ router.put("/:id", controllerUser.update);
 router.delete("/:id", controllerUser.delete);
 
 // Get services of user
-router.get("/:id/services", controllerUser.getServices);
+router.get("/:id/services", controllerService.getByUserId);
 
 module.exports = router;
