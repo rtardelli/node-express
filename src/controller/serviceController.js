@@ -48,15 +48,24 @@ class ServiceController {
   }
 
   getByUserId = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Get services by UserId: ' + req.params.id);
+    const userID = req.params.id;
+    const serviceList = await this.repository.getServicesByUserID(userID);
+    
+    res.status(200).json(serviceList);
   }
 
   getByStoreId = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Get services by StoreId: ' + req.params.id);
+    const storeID = req.params.id;
+    const serviceList = await this.repository.getServicesByStoreID(storeID);
+    
+    res.status(200).json(serviceList);
   }
 
   getByStaffId = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Get services by StaffId: ' + req.params.id);
+    const staffID = req.params.id;
+    const serviceList = await this.repository.getServicesByStaffID(staffID);
+    
+    res.status(200).json(serviceList);
   }
 };
 
