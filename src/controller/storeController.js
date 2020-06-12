@@ -41,11 +41,10 @@ class StoreController {
     const deletedStore = await this.repository.deleteStore(storeID);
     
     if(deletedStore) {
-      res.status(204);
+      res.status(204).end();
     } else {
-      res.status(404);
+      res.status(404).end();
     }
-    res.end();
   }
 };
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const controllerStore = require("../controller/storeLocal");
+const controllerStore = require("../controller/storeController");
 const controllerService = require("../controller/serviceLocal");
 
 // List all stores
