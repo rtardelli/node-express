@@ -122,24 +122,6 @@ describe('User Endpoints', () => {
       { id: 3, name: "Name service 3", userID: 7},
       { id: 4, name: "Name service 4", userID: 7}
     ]);
-
     done();
   });
-  
-  // test('should get all services', async (done) => {
-  //   // Adding user
-  //   const res = await request(app)
-  //     .post('/users')
-  //     .send({ id: 5, name: "Name user 5"});
-  //   expect(res.statusCode).toEqual(201);
-  //   expect(res.body).toEqual({});
-  //   expect(res.header['location']).toEqual('/users/5');
-  //   const res = await request(app)
-  //     .post('/services')
-  //     .send({ id: 1, name: "Name service 5", userID: 5});
-  //   expect(res.statusCode).toEqual(201);
-  //   expect(res.body).toEqual({});
-  //   expect(res.header['location']).toEqual('/service/1');
-  //   done();
-  // });
 });
