@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const app = require('../src/server')
+const app = require('../src/server');
 describe('Service Endpoints', () => {
   test('should get all services empty', async (done) => {
     const res = await request(app).get('/services');
