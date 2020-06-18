@@ -20,6 +20,6 @@ router.put("/:id", controllerStore.update);
 router.delete("/:id", controllerStore.delete);
 
 // Get services of a store
-router.delete("/:id/services", controllerService.getByStoreId);
+router.get("/:id/services", controllerService.getByStoreId);
 
 module.exports = router;

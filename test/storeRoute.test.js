@@ -60,4 +60,68 @@ describe('store Endpoints', () => {
     expect(res.body).toEqual({});
     done();
   });
+
+  test('should get all services of a store', async (done) => {
+    // Adding new user that will not have any services
+    let res = await request(app).post('/stores')
+      .send({ id: 5, name: "Name store 5"});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/stores/5');
+    
+    res = await request(app).get('/stores/5/services');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toEqual([]);
+
+    // Adding new store that will have one service
+    res = await request(app).post('/stores')
+      .send({ id: 6, name: "Name store 6"});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/stores/6');
+
+    res = await request(app).post('/services')
+      .send({ id: 5, name: "Name service 5", userID: 1, storeID: 6});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/services/5');
+
+    res = await request(app).get('/stores/6/services');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toEqual([{ id: 5, name: "Name service 5", userID: 1, storeID: 6}]);
+
+    // Adding new user that will have one service
+    res = await request(app).post('/stores')
+      .send({ id: 7, name: "Name store 7"});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/stores/7');
+
+    res = await request(app).post('/services')
+      .send({ id: 6, name: "Name service 6", userID: 7, storeID: 7});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/services/6');
+
+    res = await request(app).post('/services')
+      .send({ id: 7, name: "Name service 7", userID: 7, storeID: 7});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/services/7');
+
+    res = await request(app).post('/services')
+      .send({ id: 8, name: "Name service 8", userID: 7, storeID: 7});
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toEqual({});
+    expect(res.header['location']).toEqual('/services/8');
+
+    res = await request(app).get('/stores/7/services');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toEqual([
+      { id: 6, name: "Name service 6", userID: 7, storeID: 7},
+      { id: 7, name: "Name service 7", userID: 7, storeID: 7},
+      { id: 8, name: "Name service 8", userID: 7, storeID: 7}
+    ]);
+    done();
+  });
 });
