@@ -20,6 +20,6 @@ router.put("/:id", controllerStaff.update);
 router.delete("/:id", controllerStaff.delete);
 
 // Get services of a staff
-router.delete("/:id/services", controllerService.getByStaffId);
+router.get("/:id/services", controllerService.getByStaffId);
 
 module.exports = router;
