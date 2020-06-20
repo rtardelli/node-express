@@ -12,7 +12,7 @@ describe('Service Endpoints', () => {
   test('should post one service', async (done) => {
     const res = await request(app)
       .post('/services')
-      .send({ id: 1, name: "Name service 1", userID: 1});
+      .send({ id: 1, description: "Name service 1", storeID: 3, userID: 1});
     expect(res.statusCode).toEqual(201);
     expect(res.body).toEqual({});
     expect(res.header['location']).toEqual('/services/1');
@@ -32,18 +32,18 @@ describe('Service Endpoints', () => {
     expect(res.statusCode).toEqual(200);
     const responseBody = res.body;
     expect(responseBody.id).toEqual(1);
-    expect(responseBody.name).toEqual("Name service 1");
+    expect(responseBody.description).toEqual("Name service 1");
     done();
   });
 
   test('should update service', async (done) => {
     let res = await request(app)
       .put("/services/1")
-      .send({ id: 1, name: "New service name" });
+      .send({ id: 1, description: "New service name", storeID: 3, userID: 1 });
     expect(res.statusCode).toEqual(200);
     const responseBody = res.body;
     expect(responseBody.id).toEqual(1);
-    expect(responseBody.name).toEqual("New service name");
+    expect(responseBody.description).toEqual("New service name");
     done();
   });
 

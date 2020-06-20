@@ -1,4 +1,5 @@
 const diConfig = require("../config/config");
+const { body, validationResult } = require('express-validator');
 
 class ServiceController {
   constructor(){
@@ -16,8 +17,13 @@ class ServiceController {
   }
 
   add = async (req, res) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const service = req.body;
-    // TODO: Validate service
     await this.repository.addService(service);
     res.location("/services/" + service.id);
     res.status(201).end();
@@ -30,8 +36,13 @@ class ServiceController {
   }
 
   update = async (req, res) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const service = req.body;
-    // TODO: Validate service
     await this.repository.updateService(service);
     res.status(200).json(service);
   }
@@ -66,7 +77,13 @@ class ServiceController {
     const serviceList = await this.repository.getServicesByStaffID(staffID);
     
     res.status(200).json(serviceList);
-  }
+  };
+
+  validations = [
+    body('description').exists().withMessage('must have description name'),
+    body('storeID').exists().withMessage('Service must be ordered in some store'),
+    body('userID').exists().withMessage('Service must be ordered by some user'),
+  ];
 };
 
 module.exports = new ServiceController();

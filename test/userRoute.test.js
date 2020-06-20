@@ -81,14 +81,14 @@ describe('User Endpoints', () => {
     expect(res.header['location']).toEqual('/users/6');
 
     res = await request(app).post('/services')
-      .send({ id: 1, name: "Name service 1", userID: 6});
+      .send({ id: 1, description: "Name service 1", storeID: 1, userID: 6});
     expect(res.statusCode).toEqual(201);
     expect(res.body).toEqual({});
     expect(res.header['location']).toEqual('/services/1');
 
     res = await request(app).get('/users/6/services');
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual([{ id: 1, name: "Name service 1", userID: 6}]);
+    expect(res.body).toEqual([{ id: 1, description: "Name service 1", storeID: 1, userID: 6}]);
 
     // Adding new user that will have one service
     res = await request(app).post('/users')
@@ -98,19 +98,19 @@ describe('User Endpoints', () => {
     expect(res.header['location']).toEqual('/users/7');
 
     res = await request(app).post('/services')
-      .send({ id: 2, name: "Name service 2", userID: 7});
+      .send({ id: 2, description: "Name service 2", storeID: 1, userID: 7});
     expect(res.statusCode).toEqual(201);
     expect(res.body).toEqual({});
     expect(res.header['location']).toEqual('/services/2');
 
     res = await request(app).post('/services')
-      .send({ id: 3, name: "Name service 3", userID: 7});
+      .send({ id: 3, description: "Name service 3", storeID: 1, userID: 7});
     expect(res.statusCode).toEqual(201);
     expect(res.body).toEqual({});
     expect(res.header['location']).toEqual('/services/3');
 
     res = await request(app).post('/services')
-      .send({ id: 4, name: "Name service 4", userID: 7});
+      .send({ id: 4, description: "Name service 4", storeID: 1, userID: 7});
     expect(res.statusCode).toEqual(201);
     expect(res.body).toEqual({});
     expect(res.header['location']).toEqual('/services/4');
@@ -118,9 +118,9 @@ describe('User Endpoints', () => {
     res = await request(app).get('/users/7/services');
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual([
-      { id: 2, name: "Name service 2", userID: 7},
-      { id: 3, name: "Name service 3", userID: 7},
-      { id: 4, name: "Name service 4", userID: 7}
+      { id: 2, description: "Name service 2", storeID: 1, userID: 7},
+      { id: 3, description: "Name service 3", storeID: 1, userID: 7},
+      { id: 4, description: "Name service 4", storeID: 1, userID: 7}
     ]);
     done();
   });

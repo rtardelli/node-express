@@ -8,13 +8,13 @@ const controllerService = require("../controller/serviceController");
 router.get("/", controllerStaff.getAll);
 
 // Add staff
-router.post("/", controllerStaff.add);
+router.post("/", controllerStaff.validations, controllerStaff.add);
 
 // Get staff
 router.get("/:id", controllerStaff.get);
 
 // Update staff
-router.put("/:id", controllerStaff.update);
+router.put("/:id", controllerStaff.validations, controllerStaff.update);
 
 // Delete staff
 router.delete("/:id", controllerStaff.delete);

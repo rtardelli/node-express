@@ -1,4 +1,5 @@
 const diConfig = require("../config/config");
+const { body, validationResult } = require('express-validator');
 
 class UserController {
   constructor(){
@@ -16,8 +17,13 @@ class UserController {
   }
 
   add = async (req, res) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const user = req.body;
-    // TODO: Validate user
     await this.repository.addUser(user);
     res.location("/users/" + user.id);
     res.status(201).end();
@@ -30,8 +36,13 @@ class UserController {
   }
 
   update = async (req, res) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const user = req.body;
-    // TODO: Validate user
     await this.repository.updateUser(user);
     res.status(200).json(user);
   }
@@ -53,6 +64,10 @@ class UserController {
 
     res.status(200).json(services);
   };
+
+  validations = [
+    body('name').exists().withMessage('must have user name')
+  ];
 };
 
 module.exports = new UserController();

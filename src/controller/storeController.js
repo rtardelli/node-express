@@ -1,4 +1,5 @@
 const diConfig = require("../config/config");
+const { body, validationResult } = require('express-validator');
 
 class StoreController {
   constructor(){
@@ -16,8 +17,13 @@ class StoreController {
   }
 
   add = async (req, res) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const store = req.body;
-    // TODO: Validate store
     await this.repository.addStore(store);
     res.location("/stores/" + store.id);
     res.status(201).end();
@@ -30,8 +36,13 @@ class StoreController {
   }
 
   update = async (req, res) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const store = req.body;
-    // TODO: Validate store
     await this.repository.updateStore(store);
     res.status(200).json(store);
   }
@@ -45,7 +56,12 @@ class StoreController {
     } else {
       res.status(404).end();
     }
-  }
+  };
+
+  validations = [
+    body('name').exists().withMessage('store must have name'),
+    body('address').exists().withMessage('store must have an address')
+  ];
 };
 
 module.exports = new StoreController();

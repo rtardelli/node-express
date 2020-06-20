@@ -8,13 +8,13 @@ const controllerService = require("../controller/serviceController");
 router.get("/", controllerStore.getAll);
 
 // Add store
-router.post("/", controllerStore.add);
+router.post("/", controllerStore.validations, controllerStore.add);
 
 // Get store
 router.get("/:id", controllerStore.get);
 
 // Update store
-router.put("/:id", controllerStore.update);
+router.put("/:id", controllerStore.validations, controllerStore.update);
 
 // Delete store
 router.delete("/:id", controllerStore.delete);
