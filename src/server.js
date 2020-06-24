@@ -1,8 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const fs = require('fs');
-const path = require('path')
+const winston = require("./config/winston");
 const swaggerUi = require("swagger-ui-express");
 
 const YAML = require("yamljs");
@@ -26,8 +25,7 @@ class App {
     }
 
     middlewares() {
-        const accessLogStream = fs.createWriteStream(path.join(__dirname, "../access.log"), { flags: "a" });
-        this.express.use(morgan("combined", { stream: accessLogStream }));
+        this.express.use(morgan("combined", { stream: winston.stream }));
         this.express.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
         this.express.use(bodyParser.json()); // for parsing application/json
     }
